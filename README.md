@@ -2,6 +2,6 @@
 
 ## Solution of C course assignments.
 
-###Assignment 1
+Assignment 1
 
 Create the Gnim game
