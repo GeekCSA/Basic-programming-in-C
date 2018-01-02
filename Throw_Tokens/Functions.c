@@ -15,21 +15,56 @@ void play()
 	int table_of_steps[ROWS][COLUMNS] = {{0}};
 	int count_of_turns = 0;
 	int user_choice;
+	int number_of_massege = 0;
 	bool win_Situation = false;
 
 	for (int i = 0; i < COLUMNS; i++) {
 		head_of_columns[i] = ROWS - 1;
 	}
+	puts("Welcome!");
 
-	while(1)
+	printArr(table_of_tokens);
+
+	while((number_of_massege == 0))
 	{
-		puts("Enter 0 for UNDO.\nOr enter number of column that you want to put the token");
-		scanf("%d",&user_choice);
+		setvbuf(stdout,NULL, _IONBF, 0);
+		char user_number[50];
 
-		while(checkFullcolumn(head_of_columns,COLUMNS,user_choice))
+		if(count_of_turns == COLUMNS*ROWS)
 		{
-			printf("Illegal number! Please enter number between 0 to %d",COLUMNS);
-			scanf("%d",&user_choice);
+			puts("The end matrix is:\n");
+			printArr(table_of_tokens);
+			puts("It's a tie!");
+			return ;
+		}
+
+		printf("Player %c, please enter a column number (or 0 to UNDO)",(count_of_turns % 2 == 0)? 'o' : 'x');
+		gets(user_number);
+
+		number_of_massege = checkInput(head_of_columns,COLUMNS,user_number,&user_choice);
+
+		//Input a number from user
+		while(number_of_massege)
+		{
+			if(number_of_massege == 1)
+				return ;
+
+			int tableIsFull = 0;
+
+			for(int i = 0; i < COLUMNS; i++)
+			{
+				if(table_of_steps[0][i] != 0)
+					tableIsFull = 1;
+			}
+
+			if(number_of_massege == 2)
+				break;
+
+			puts("The corrent table is:\n\t");
+			printArr(table_of_tokens);
+			gets(user_number);
+
+			number_of_massege = checkInput(head_of_columns,COLUMNS,user_number,&user_choice);
 		}
 
 
@@ -75,7 +110,7 @@ void play()
 			{
 				head_of_columns[index_of_prev_turnX]++;
 				table_of_steps[index_of_prev_turnY][index_of_prev_turnX] = 0;
-				table_of_tokens[index_of_prev_turnY][index_of_prev_turnX] = 1;
+				//table_of_tokens[index_of_prev_turnY][index_of_prev_turnX] = 1;
 				table_of_tokens[index_of_prev_turnY][index_of_prev_turnX] = 0;
 			}
 
@@ -87,25 +122,145 @@ void play()
 
 		if(win_Situation)
 		{
-			int player_order = (count_of_turns % 2 == 0)? 2 : 1;
-			printf("The player %d win",player_order);
+			char player_order = (count_of_turns % 2 == 0)? 'x' : 'o';
+			printf("The player %c win",player_order);
 			break;
 		}
 	}
 }
 
-bool checkFullcolumn(int head_of_columns[],int columns,int user_choice)
+int checkChar(char* s,int len, char c)
 {
-	if((user_choice < 0))
-		return true;
+	int countC = 0;
 
-	if(user_choice > columns)
-		return true;
+	for(int i = 0; i < len; i++)
+	{
+		if(s[i] == c )
+			countC++;
+	}
 
-	if(head_of_columns[user_choice - 1] == -1)//I sub 1 for fix to index of array that start from 0
-		return true;
+	return countC;
+}
 
-	return false;
+int checkNotDigitNotPoint(char* s,int len)
+{
+	int countC = 0;
+
+	for(int i = 0; i < len; i++)
+	{
+		if((s[i] < '0') || ((s[i] > '9') && (s[i] != '.')))
+			countC++;
+	}
+
+	return countC;
+}
+
+/**
+ * If return 0 is everything OK.
+ *
+ * If return 1 than the input is not any number, or double with full column.
+ *
+ * If return 2 than the input is double number, with correct column.
+ *
+ * If return 3 than the input is integer number, but out of the table and not UNDO (0).
+ *
+ * If return 4 than the input is integer number, but cannot UNDO because the table is empty.
+ *
+ * If return 5 than the input is integer number, but the correct column is full.
+ *
+ * If return 6 than the input is integer number, but the table is full.
+ *
+ */
+int checkInput(int head_of_columns[],int columns,char* user_number_choice, int* num_of_user_choice)
+{
+	int numChoice;
+
+	int countOfPoints = checkChar(user_number_choice,strlen(user_number_choice),'.');
+
+	int countOfChars = checkNotDigitNotPoint(user_number_choice,strlen(user_number_choice));
+
+	if(countOfChars > 0)
+	{
+		puts("Invalid input, bye-bye!");
+		*num_of_user_choice = -1;
+		return 1;
+	}
+
+	if(countOfPoints > 1)
+	{
+		puts("Invalid input, bye-bye!");
+		*num_of_user_choice = -1;
+		return 1;
+	}
+
+	numChoice = (int)atof(user_number_choice);
+
+	if(countOfPoints == 1)
+	{
+		puts("Invalid input, bye-bye!");
+		if(!(head_of_columns[numChoice - 1] == -1))
+		{
+			*num_of_user_choice = numChoice;
+			return 2;
+		}
+		*num_of_user_choice = -1;
+		return 1;
+	}
+
+	if((numChoice < 0))
+	{
+		*num_of_user_choice = -1;
+		printf("Invalid input, the number must be between 1 to %d (or 0 to undo):",columns);
+		return 3;
+	}
+
+	if(numChoice > columns)
+	{
+		*num_of_user_choice = -1;
+		printf("Invalid input, the number must be between 1 to %d (or 0 to undo):",columns);
+		return 3;
+	}
+
+	if(numChoice == 0)
+	{
+		for(int i = 0; i < columns; i++)
+		{
+			if(head_of_columns[i - 1] < ROWS - 1)//I sub 1 for fix to index of array that start from 0
+			{
+				*num_of_user_choice = numChoice;
+				return 0;
+			}
+		}
+
+		*num_of_user_choice = -1;
+		puts("Board is empty - can't undo!");
+		return 4;
+	}
+
+	bool fullTable = true;
+	for(int i = 0; i < columns; i++)
+	{
+		if(head_of_columns[i - 1] > -1)//I sub 1 for fix to index of array that start from 0
+		{
+			fullTable = false;
+		}
+	}
+
+	if(fullTable)
+	{
+		puts("full table");
+		return 6;
+	}
+
+
+	if(head_of_columns[numChoice - 1] == -1)//I sub 1 for fix to index of array that start from 0
+	{
+		*num_of_user_choice = -1;
+		puts("Invalid input, this column is full. Please choose another one:");
+		return 5;
+	}
+	*num_of_user_choice = numChoice;
+	return 0;
 }
 
 bool hasSeries(int table[ROWS][COLUMNS],int rows,int columns,int x,int y,int playerOrder)
@@ -214,19 +369,22 @@ void printArr(int a[ROWS][COLUMNS])
 	{
 		for(int q = 0; q < COLUMNS; q++)
 		{
+			printf("|");
 			if(a[k][q] == 0)
-				printf("| |");
+				printf(" ");
 			if(a[k][q] == 1)
-				printf("|x|");
+				printf("x");
 			if(a[k][q] == 2)
-				printf("|o|");
+				printf("o");
+
 		}
+		printf("|");
 		printf("\n");
 	}
 
 	for(int k = 0; k < COLUMNS; k++)
 	{
-		printf(" %d ",k + 1);
+		printf(" %d",k + 1);
 	}
 
 	printf("\n");
