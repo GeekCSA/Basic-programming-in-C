@@ -15,48 +15,54 @@
 
 #include "Stack.h"
 
+Node* stack = NULL;
+
 bool isStringBalanced(char** sentence, int size)
 {
-	char* s = *sentence;
 	int countOfparentheses = 0;
 
-	Node* stack = NULL;
-
-	for(int i = 0; i < size; i++)
+	for(int j = 0; j < size; j++)
 	{
-		printf("%c",s[i]);
+		char* s = sentence[j];
+		int sLen = strlen(s);
+		for (int i = 0; i < sLen; ++i) {
 
-		if((s[i] == '(')||(s[i] == '[')||(s[i] == '{'))
-		{
-			countOfparentheses++;
-			if(stack == NULL)
-				stack = createNewNode(s[i]);
-			else
+			printf("%c",s[i]);
+
+			//Check if the character is open parentheses
+			if((s[i] == '(')||(s[i] == '[')||(s[i] == '{'))
 			{
-				push(stack, s[i]);
-			}
+				countOfparentheses++;
+				if(stack == NULL)
+					stack = createNewNode(s[i]);
+				else
+				{
+					push(stack, s[i]);
+				}
 
-		}
-		if((s[i] == ')'))
-		{
-			char parentheses = pop(&stack);
-			if(parentheses != '(')
-				return false;
-			countOfparentheses--;
-		}
-		if((s[i] == ']'))
-		{
-			char parentheses = pop(&stack);
-			if(parentheses != '[')
-				return false;
-			countOfparentheses--;
-		}
-		if((s[i] == '}'))
-		{
-			char parentheses = pop(&stack);
-			if(parentheses != '{')
-				return false;
-			countOfparentheses--;
+			}
+			//Check if the character is close parentheses
+			if((s[i] == ')'))
+			{
+				char parentheses = pop(&stack);
+				if(parentheses != '(')
+					return false;
+				countOfparentheses--;
+			}
+			if((s[i] == ']'))
+			{
+				char parentheses = pop(&stack);
+				if(parentheses != '[')
+					return false;
+				countOfparentheses--;
+			}
+			if((s[i] == '}'))
+			{
+				char parentheses = pop(&stack);
+				if(parentheses != '{')
+					return false;
+				countOfparentheses--;
+			}
 		}
 	}
 
@@ -71,10 +77,11 @@ bool isStringBalanced(char** sentence, int size)
 
 int main(void) {
 
-	char* s = "if (x[i] > x[j]) { return;}";
-	int sLen = strlen(s);
+//	char* s = "if (x[i] > x[j]) { return;}";
 
-	if(isStringBalanced(&s,sLen))
+	char* s[4] = {{"if "},{"(x[i] > "},{" x[j]) {"},{" return;}"}};
+
+	if(isStringBalanced(s,4))
 	{
 		puts("\nThe parentheses are matched");
 	}
