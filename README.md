@@ -1,18 +1,9 @@
-# Ariel_C
-
-## Solution of C course assignments
-
-### Assignment 1
-
-Create the Gnim game to understand the rules of the game will be read https://en.wikipedia.org/wiki/Nim.
-
-### Assignment 2
-
-Write code which finds all the words in the array that appear in the vocabulary.
-
-## Solution of assigniment in networks course
-
-In the "Client Server" folder threr are files in C which perform server and client actions.
- 
-
+# In these projects there are several parts, all written in C.
+### Details of the projects presented:
+Note: Within each of the projects there is a page of explanations that details the project and how it works.
+**Client_Server** - Contains programs that simulate a server and a client.
+**Gnim_game** - A game with numbers.
+**Pointers** - for use in pointers.
+**Search_word_in_matrix** - A game with words.
+**Throw_tokens_game** - Board game with coins.
 
