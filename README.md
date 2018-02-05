@@ -2,6 +2,8 @@
 ### Details of the projects presented:
 Note: Within each of the projects there is a page of explanations that details the project and how it works.
 
+**Binary_Search_Tree** - The implamention of a binary search tree.
+
 **Client_Server** - Contains programs that simulate a server and a client.
 
 **Gnim_game** - A game with numbers.
