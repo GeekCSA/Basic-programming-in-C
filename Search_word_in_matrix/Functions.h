@@ -1,13 +1,15 @@
 /*
- * Functions.h
- *
- *  Created on: Nov 28, 2017
- *      Author: moshe
+ ============================================================================
+ Name        : Functions.h
+ Author      : Moshe
+ Version     : 0.1
+ Created on  : Nov 28, 2017
+ Copyright   : Your copyright notice
+ ============================================================================
  */
 
 #include <stdbool.h>
 #include <string.h>
-//#include "searchWord.h";
 
 #define MATRIX_SIZE 4 // Number of columns and rows of matrix
 

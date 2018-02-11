@@ -1,12 +1,14 @@
 /*
- * Functions.c
- *
- *  Created on: Dec 14, 2017
- *      Author: moshe
+ ============================================================================
+ Name        : Functions.c
+ Author      : Moshe
+ Version     : 0.1
+ Created on  : Dec 14, 2017
+ Copyright   : Your copyright notice
+ ============================================================================
  */
 
 #include "Functions.h"
-
 
 void play()
 {
@@ -103,14 +105,11 @@ void play()
 					index_of_prev_turnY = column_head;
 				}
 			}
-			//printf("\ncolumn: %d \n",index_of_prev_turnX);
-			//printf("\nrow: %d \n",index_of_prev_turnY);
 
 			if(index_of_prev_turnX > -1)
 			{
 				head_of_columns[index_of_prev_turnX]++;
 				table_of_steps[index_of_prev_turnY][index_of_prev_turnX] = 0;
-				//table_of_tokens[index_of_prev_turnY][index_of_prev_turnX] = 1;
 				table_of_tokens[index_of_prev_turnY][index_of_prev_turnX] = 0;
 			}
 
@@ -252,7 +251,6 @@ int checkInput(int head_of_columns[],int columns,char* user_number_choice, int* 
 		return 6;
 	}
 
-
 	if(head_of_columns[numChoice - 1] == -1)//I sub 1 for fix to index of array that start from 0
 	{
 		*num_of_user_choice = -1;
@@ -266,25 +264,17 @@ int checkInput(int head_of_columns[],int columns,char* user_number_choice, int* 
 bool hasSeries(int table[ROWS][COLUMNS],int rows,int columns,int x,int y,int playerOrder)
 {
 	bool hasWin = false;
-
 	int sequence_length = 0;
 
-	//[row][column]
-
-	//printf("\n");
 	for(int k = y; k < y + 1 && sequence_length < 4; k++)
 	{//row
 		for(int q = 0; q < COLUMNS && sequence_length < 4; q++)
 		{
-			//printf(" %d ",table[k][q]);
-
 			if(table[y][q] == playerOrder)
 				sequence_length++;
 			else
 				sequence_length = 0;
-
 		}
-		//printf("\n");
 	}
 
 	hasWin = (sequence_length >= 4)? true : false;
@@ -292,21 +282,16 @@ bool hasSeries(int table[ROWS][COLUMNS],int rows,int columns,int x,int y,int pla
 		return hasWin;
 
 	sequence_length = 0;
-
-	//printf("\n");
 
 	for(int k = 0; k < ROWS && sequence_length < 4; k++)
 	{//column
 		for(int q = x; q < x + 1 && sequence_length < 4; q++)
 		{
-			//printf(" %d ",table[k][q]);
-
 			if(table[k][x] == playerOrder)
 				sequence_length++;
 			else
 				sequence_length = 0;
 		}
-		//printf("\n");
 	}
 
 	hasWin = (sequence_length >= 4)? true : false;
@@ -315,8 +300,6 @@ bool hasSeries(int table[ROWS][COLUMNS],int rows,int columns,int x,int y,int pla
 		return hasWin;
 
 	sequence_length = 0;
-
-	//printf("\n");
 
 	int set = 4;
 	int sizeMax = (COLUMNS > ROWS)? COLUMNS : ROWS;
@@ -325,15 +308,12 @@ bool hasSeries(int table[ROWS][COLUMNS],int rows,int columns,int x,int y,int pla
 	{
 		if(((x + i - set >= 0) && (x + i - set < COLUMNS)) && ((y + i - set >= 0) && (y + i - set < ROWS)))
 		{
-			//printf(" %d ",table[y + i - set][x + i - set]);
 			if(table[y + i - set][x + i - set] == playerOrder)
 				sequence_length++;
 			else
 				sequence_length = 0;
 		}
-
 	}
-	//printf("\n");
 
 	hasWin = (sequence_length >= 4)? true : false;
 
@@ -346,20 +326,16 @@ bool hasSeries(int table[ROWS][COLUMNS],int rows,int columns,int x,int y,int pla
 	{
 		if(((x - i + set >= 0) && (x - i + set < COLUMNS)) && ((y + i - set >= 0) && (y + i - set < ROWS)))
 		{
-			//printf(" %d ",table[y + i - set][x + i - set]);
 			if(table[y + i - set][x - i + set] == playerOrder)
 				sequence_length++;
 			else
 				sequence_length = 0;
 		}
 	}
-	//printf("\n");
 
 	hasWin = (sequence_length >= 4)? true : false;
 
 	return hasWin;
-
-
 }
 
 void printArr(int a[ROWS][COLUMNS])
@@ -389,4 +365,3 @@ void printArr(int a[ROWS][COLUMNS])
 
 	printf("\n");
 }
-

@@ -1,15 +1,18 @@
 /*
- * Functions.c
- *
- *  Created on: Nov 28, 2017
- *      Author: moshe
+ ============================================================================
+ Name        : Functions.c
+ Author      : moshe
+ Version     : 0.1
+ Created on  : Nov 28, 2017
+ Copyright   : Your copyright notice
+ ============================================================================
  */
 
 #include "Functions.h"
 
 bool isWord(char* s){
 
-		return (!strcmp(s,"CAT") |
+	return (!strcmp(s,"CAT") |
 			!strcmp(s,"CATS") |
 			!strcmp(s,"TRAM") |
 			!strcmp(s,"TRAMS") |
@@ -43,7 +46,6 @@ void printArr(int a[MATRIX_SIZE][MATRIX_SIZE])
 		}
 		printf("\n");
 	}
-	//printf("\n");
 }
 
 int recursivePrintWords(char A[MATRIX_SIZE][MATRIX_SIZE],int steps[MATRIX_SIZE][MATRIX_SIZE],int i, int j,char word1[])
@@ -58,7 +60,6 @@ int recursivePrintWords(char A[MATRIX_SIZE][MATRIX_SIZE],int steps[MATRIX_SIZE][
 	for(k = 0; k < strlen(word1); k++)
 	{
 		temp[k] = word1[k];
-		//printf("%c",temp[k]);
 	}
 	temp[k] = A[i][j];
 	k++;
@@ -73,32 +74,24 @@ int recursivePrintWords(char A[MATRIX_SIZE][MATRIX_SIZE],int steps[MATRIX_SIZE][
 
 	if((i + 1 < MATRIX_SIZE) && (steps[i + 1][j] == 0 ))
 	{
-		//printf("%d",steps[i + 1][j]);
-		//printArr(steps);
 		numberOfWords += recursivePrintWords(A,steps,i + 1,j,temp);
 		steps[i+1][j] = 0;
 	}
 
 	if((j + 1 < MATRIX_SIZE) && (steps[i][j + 1] == 0 ))
 	{
-		//printf("%d",steps[i][j + 1]);
-		//printArr(steps);
 		numberOfWords += recursivePrintWords(A,steps,i,j + 1,temp);
 		steps[i][j+1] = 0;
 	}
 
 	if((i - 1 >= 0)  && (steps[i - 1][j] == 0 ))
 	{
-		//printf("%d",steps[i - 1][j]);
-		//printArr(steps);
 		numberOfWords += recursivePrintWords(A,steps,i - 1,j,temp);
 		steps[i-1][j] = 0;
 	}
 
 	if((j - 1 >= 0) && (steps[i][j - 1] == 0 ))
 	{
-		//printf("%d",steps[i][j - 1]);
-		//printArr(steps);
 		numberOfWords += recursivePrintWords(A,steps,i,j - 1,temp);
 		steps[i][j-1] = 0;
 	}
@@ -118,11 +111,9 @@ int printWords(char A[MATRIX_SIZE][MATRIX_SIZE])
 		{
 			int steps[MATRIX_SIZE][MATRIX_SIZE] = {0};
 			char s[] = {};
-			//printf("%s",s);
 			numberOfWords += recursivePrintWords(A,steps,i,j,s);
 		}
 	}
 
 	return numberOfWords;
 }
-

@@ -1,10 +1,10 @@
 /*
  ============================================================================
  Name        : ThorwTokens.c
- Author      : 
- Version     :
+ Author      : Moshe
+ Version     : 0.1
+ Created on  : Dec 14, 2017
  Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
  ============================================================================
  */
 
@@ -16,5 +16,3 @@ int main(void) {
 
 	return 0;
 }
-
-

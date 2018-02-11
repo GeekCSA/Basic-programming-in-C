@@ -1,10 +1,10 @@
 /*
  ============================================================================
  Name        : SearchWordInMatrix.c
- Author      : 
- Version     :
+ Author      : Moshe
+ Version     : 0.1
+ Created on  : Nov 28, 2017
  Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
  ============================================================================
  */
 

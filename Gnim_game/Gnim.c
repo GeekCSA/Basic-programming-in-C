@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Name        : Gnim.c
- Author      : 
+ Author      : moshe
  Version     :
  Copyright   : Your copyright notice
  Description : Hello World in C, Ansi-style
@@ -13,6 +13,8 @@
 #include <stdbool.h>
 #include <math.h>
 #include "Player.h"
+
+//This code without pointers!
 
 int main(void) {
 

@@ -1,8 +1,11 @@
 /*
- * Player.h
- *
- *  Created on: Nov 12, 2017
- *      Author: moshe
+ ============================================================================
+ Name        : Player.h
+ Author      : moshe
+ Version     : 0.1
+ Created on  : Nov 12, 2017
+ Copyright   : Your copyright notice
+ ============================================================================
  */
 
 #ifndef PLAYER_H_

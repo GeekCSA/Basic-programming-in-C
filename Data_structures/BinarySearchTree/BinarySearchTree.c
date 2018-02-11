@@ -1,8 +1,11 @@
 /*
- * BinaryTree.c
- *
- *  Created on: Feb 5, 2018
- *      Author: moshe
+ ============================================================================
+ Name        : BinaryTree.c
+ Author      : moshe
+ Version     : 0.1
+ Created on  : Feb 5, 2018
+ Copyright   : Your copyright notice
+ ============================================================================
  */
 
 #include "BinarySearchTree.h"
@@ -63,28 +66,11 @@ void freeTree(Node* root)
 {
 	if (root != NULL)
 	{
-		freeTree(root->leftNode); // free left subtree
-		freeTree(root->rightNode); // free right subtree
-		free(root->data); // free pointed word
-		free(root); // free node itself
+		freeTree(root->leftNode); 	// free left subtree
+		freeTree(root->rightNode); 	// free right subtree
+		free(root->data); 			// free pointed word
+		free(root); 				// free node itself
 	}
-	//	if(root == NULL)
-	//		return;
-	//
-	//	if((root->leftNode == NULL) && (root->rightNode == NULL))
-	//	{
-	//		printf("The node that deleted is %s\n",root->data);
-	//		free(root->data);
-	//		free(root);
-	//	}
-	//	else
-	//	{
-	//		freeTree(root->leftNode);
-	//		freeTree(root->rightNode);
-	//		printf("The node that deleted is %s\n",root->data);
-	//		free(root->data);
-	//		free(root);
-	//	}
 }
 
 void printTree(Node* root)

@@ -1,8 +1,11 @@
 /*
- * Functions.h
- *
- *  Created on: Dec 14, 2017
- *      Author: Student
+ ============================================================================
+ Name        : Functions.h
+ Author      : Moshe
+ Version     : 0.1
+ Created on  : Dec 14, 2017
+ Copyright   : Your copyright notice
+ ============================================================================
  */
 
 #include <stdbool.h>
@@ -56,4 +59,3 @@ int checkNotDigitNotPoint(char* s,int len);
  * The function receives a character and checks how many times it appears in the string
  */
 int checkChar(char* s,int len, char c);
-
